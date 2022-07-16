@@ -8,10 +8,7 @@ URL =
   "mongodb+srv://papyrus123:papyrus123@cluster0.czjsl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 mongoose.connect(URL);
 app.use(
-  cors({
-    origin: "digipapyrus.com", // 8000 is where we have set our create-react-app to run
-    credentials: true,
-  })
+  cors({  })
 );
 app.use(cookieParser());
 app.use(express.json());

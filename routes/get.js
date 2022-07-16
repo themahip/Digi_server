@@ -8,7 +8,7 @@ const jwt= require("jsonwebtoken");
 
 router.use(cookieParser());
 dotenv.config({path:"../config.env"});
-router.post("/authenticate",async (req,res)=>
+router.post("/api/authenticate",async (req,res)=>
 { 
 
     try {

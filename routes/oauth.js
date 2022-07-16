@@ -6,7 +6,7 @@ const client = new OAuth2Client("602782645460-9d9ognvavgj0vi6ivk92na43ch14mjof.a
 
 const router = express.Router();
 
-router.post("/googlelogin",async (req,res)=>{
+router.post("/api/googlelogin",async (req,res)=>{
     const {tokenId}= req.body;
     // console.log(tokenId);
      client.verifyIdToken({idToken:tokenId, audience:"602782645460-9d9ognvavgj0vi6ivk92na43ch14mjof.apps.googleusercontent.com"}).then(response=>{

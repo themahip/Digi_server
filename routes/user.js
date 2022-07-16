@@ -12,7 +12,7 @@ router.use(cors());
 
 router.use(cookieParser());
 
-router.post("/api/register/", (req, res) => {
+router.post("/api/register", (req, res) => {
  
     const name = req.body.name;
     const email = req.body.email;
@@ -55,29 +55,35 @@ router.post("/api/register/", (req, res) => {
   });
   
   
-  router.post("/api/login/", async (req, res) => {
+  router.post("/api/login", async (req, res) => {
+
    
     const email = req.body.username;
     const password = req.body.password;
+   
 
     if (!email || !password) {
       res.status(221).send("Please fill the fields");
     }
-    User.findOne({ email: email }, async (error, foundUser) => {
-      if (error) {
-     console.log(".");
-      } else if (foundUser) {
-        console.log("hello");
+    User.findOne({ email: email }, async(err, foundUser) => {
+
+      if(err){
+        res.status(221).send("user not found please sign up");
+        console.log(err);
+      }
+      else if(foundUser||!err) {
+        
+        
+        console.log(foundUser);
         const isMatch = await bcrypt.compare(password, foundUser.hashPassword);
   
         const token = await foundUser.generateAuthToken();
 
-  
         if (isMatch) {
           console.log("Password matched");
           console.log(token);
           res.status(220).send(token);
-          res.status(221).send("");
+
           console.log("Sent to json");
         } else {
           console.log("Not matched");

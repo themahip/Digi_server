@@ -28,7 +28,7 @@ router.post("/authenticate",async (req,res)=>
 
         if(!user){
             res.status(202).send("user not found");
-            throw error;
+            // throw error;
         }
         else{
             res.status(200).send("user found")

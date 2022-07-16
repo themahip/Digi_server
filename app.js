@@ -1,6 +1,6 @@
 const express = require("express");
 const mongoose = require("mongoose");
-const cors = require("cors");
+// const cors = require("cors");
 const cookieParser = require("cookie-parser");
 const app = express();
 require("dotenv").config({ path: "/config.env" });
@@ -9,7 +9,7 @@ URL =
 mongoose.connect(URL);
 app.use(
   cors({
-    origin: "http://localhost:3000", // 8000 is where we have set our create-react-app to run
+    origin: "digipapyrus.com", // 8000 is where we have set our create-react-app to run
     credentials: true,
   })
 );
@@ -22,7 +22,7 @@ app.use("/", require("./routes/oauth"));
 app.use("/", require("./routes/get"));
 app.use("/", require("./routes/chat"));
 
-const PORT =process.env.PORT;
+const PORT =process.env.PORT||5000;
 
 const server = app.listen(PORT, () => {
   console.log(`the app is running on port ${PORT}`);

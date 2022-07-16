@@ -26,9 +26,10 @@ router.post("/authenticate",async (req,res)=>
         
         console.log(user);
         if(!user){
-            
+          
             throw error;
         }
+      
     
         
     } catch (error) {

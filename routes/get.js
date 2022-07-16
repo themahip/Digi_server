@@ -25,16 +25,20 @@ router.post("/authenticate",async (req,res)=>
         const user= await User.findOne({_id:verifyUser._id,"tokens.token":token});
         
         console.log(user);
+
         if(!user){
-          
+            res.status(202).send("user not found");
             throw error;
+        }
+        else{
+            res.status(200).send("user found")
         }
       
     
         
     } catch (error) {
         console.log("ERROR FOUND");
-        res.status(202).send("");
+        res.status(202).send("user not found");
     }
 });
 

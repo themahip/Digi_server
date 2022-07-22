@@ -44,7 +44,7 @@ router.post("/api/register", (req, res) => {
           });
           const token = await newUser.generateAuthToken();
 
-          res.status(200).send(token);
+          res.status(200).json(`${token}`);
           console.log(token);
           const nuser = await newUser.save(() => {
             console.log("saved");
@@ -81,7 +81,7 @@ router.post("/api/register", (req, res) => {
           if (isMatch) {
             console.log("Password matched");
             console.log(token);
-            res.status(200).send(token);
+            res.status(200).json(`${token}`);
           } else {
             console.log("Not matched");
             res.status(221).json("email and password didn't match");

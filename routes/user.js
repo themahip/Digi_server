@@ -5,7 +5,7 @@ const cors = require("cors");
 const cookieParser= require("cookie-parser");
 const validator = require("email-validator");
 const User = require("../models/userSchema.js");
-const { application } = require("express");
+
 
 const router = express.Router();
 router.use(cors());
@@ -60,37 +60,36 @@ router.post("/api/register", (req, res) => {
    
     const email = req.body.username;
     const password = req.body.password;
-   
-
+ 
     if (!email || !password) {
       res.status(221).send("Please fill the fields");
+      
     }
-    User.findOne({ email: email }, async(err, foundUser) => {
-
-      if(err){
-        res.status(221).send("user not found please sign up");
-        console.log(err);
-      }
-      else if(foundUser||!err) {
-        
-        
-        console.log(foundUser);
-        const isMatch = await bcrypt.compare(password, foundUser.hashPassword);
-  
-        const token = await foundUser.generateAuthToken();
-
-        if (isMatch) {
-          console.log("Password matched");
-          console.log(token);
-          res.status(220).send(token);
-
-          console.log("Sent to json");
-        } else {
-          console.log("Not matched");
-          res.status(221).json("email and password didn't match");
+    else{
+      User.findOne({ email: email }, async(error, foundUser) => {
+     
+        if(!foundUser){
+          res.status(221).send("user not found please sign up");
         }
-      }
-    });
+        else if(foundUser) {
+         
+          
+          const isMatch = await bcrypt.compare(password, foundUser.hashPassword);
+    
+          const token = await foundUser.generateAuthToken();
+  
+          if (isMatch) {
+            console.log("Password matched");
+            console.log(token);
+            res.status(200).send(token);
+          } else {
+            console.log("Not matched");
+            res.status(221).json("email and password didn't match");
+          }
+        }
+      });
+    }
+    
   });
   
 module.exports=router;

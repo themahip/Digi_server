@@ -21,11 +21,10 @@ const chatSchema = new mongoose.Schema({
     require: true,
     default: Date.now(),
   },
-  userId:[{
-    user:{
-      type:String,
-    }
-  }]
+  userId:{
+    type:String,
+    default:"62da9116f601a10b0a891aa9"
+  }
 });
 chatSchema.methods.getLikeUser= async function(id){
   try{

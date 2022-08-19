@@ -18,8 +18,9 @@ app.use("/", require("./routes/oauth"));
 // app.use("/",require("./middleware/auth"));
 app.use("/", require("./routes/get"));
 app.use("/", require("./routes/chat"));
+app.use("/", require("./routes/like"));
 
-const PORT =process.env.PORT||5000;
+const PORT =process.env.PORT||3000;
 
 const server = app.listen(PORT, () => {
   console.log(`the app is running on port ${PORT}`);

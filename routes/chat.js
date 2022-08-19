@@ -8,6 +8,8 @@ router.post("/api/publishChat", async (req, res) => {
     title: title,
     sender: sender,
     chat: chat,
+    like: 0,
+
   });
   await newChat.save(() => {
     res.status(220).json();

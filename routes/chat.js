@@ -9,7 +9,6 @@ router.post("/api/publishChat", async (req, res) => {
     sender: sender,
     chat: chat,
     like: 0,
-
   });
   await newChat.save(() => {
     res.status(220).json();
@@ -23,14 +22,23 @@ router.get("/api/fetchChat", async (req, res) => {
 });
 
 router.post("/api/individualChat", async (req, res) => {
-  let id = req.body.id;
-  Chat.findById(id, async (err, chat) => {
+  const { chatID, userID } = req.body;
+  Chat.findById(chatID, async (err, chat) => {
     if (err) {
       console.log(err);
     } else if (!chat) {
       res.status(400).json("Chat Not Found");
     } else {
-      res.status(200).json(chat);
+      // res.status(200).json({ chat, liked: true });
+      if (userID) {
+        if (chat.likes.includes(userID)) {
+          res.status(200).json({ chat, liked: true });
+        } else {
+          res.status(200).json({ chat, liked: true });
+        }
+      } else {
+        res.status(200).json(chat);
+      }
     }
   });
 });

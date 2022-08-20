@@ -15,11 +15,11 @@ router.post("/api/like", async (req, res) => {
         if (chat.likes.includes(userID)) {
           chat.likes.pull(userID);
           await chat.save();
-          res.json({ message: "unliked", likes: chat.likes.length });
+          res.json({ message: "unliked", likeNo: chat.likes.length });
         } else {
           chat.likes.push(userID);
           await chat.save();
-          res.json({ message: "liked", likes: chat.likes.length });
+          res.json({ message: "liked", likeNo: chat.likes.length });
         }
       }
     });

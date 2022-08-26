@@ -81,7 +81,7 @@ router.post("/api/register", (req, res) => {
           if (isMatch) {
             console.log("Password matched");
             console.log(token);
-            res.status(200).json(`${token}`);
+            res.status(200).json({token:`${token}`, userID:`${foundUser._id}`});
           } else {
             console.log("Not matched");
             res.status(221).json("email and password didn't match");

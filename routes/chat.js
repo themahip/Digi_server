@@ -16,9 +16,17 @@ router.post("/api/publishChat", async (req, res) => {
 });
 
 router.get("/api/fetchChat", async (req, res) => {
-  Chat.find({}, (err, chats) => {
-    res.status(220).json(chats);
-  });
+  try{
+    const chats=await Chat.find({}).sort({likes:1});
+    console.log(chats);
+      res.status(220).json(chats);
+
+    
+  }
+  catch(err){
+    console.log(err);
+  }
+ 
 });
 
 router.post("/api/individualChat", async (req, res) => {

@@ -21,19 +21,12 @@ const chatSchema = new mongoose.Schema({
     require: true,
     default: Date.now(),
   },
-  userId:[{
-    type:String
-  }]
+  likes: [
+    {
+      type: String,
+    },
+  ],
 });
-chatSchema.methods.getLikeUser= async function(id){
-  try{
-    this.userId=this.userId.concat({id});
-    this.save();
-  }catch(err){
-    console.log(err);
-  }
-
-}
 
 const Chat = mongoose.model("Chat", chatSchema);
 module.exports = Chat;
